@@ -1,4 +1,4 @@
-import food from "./components/food";
+import Food from "./components/food";
 import Details from "./components/details";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/navigationBar';
@@ -9,9 +9,8 @@ function App() {
     <Router>
       <NavigationBar />
       <Routes>
-        <Route path="/home" element={<food />} />
-        <Route path="/food" element={<h1>Read Component</h1>} />
-        <Route path="/details" element={<h1>Create Component</h1>} />
+        <Route path="/food" element={<Food />} />
+        <Route path="/details" element={<Details/>} />
       </Routes>
     </Router>
   );

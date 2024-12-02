@@ -1,11 +1,33 @@
 const express = require('express');
 const app = express();
 const port = 4000;
+
 const cors = require('cors');
 app.use(cors());
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11'); // Connect to MongoDB database
+
+const movieSchema = new mongoose.Schema({
+  title: String,
+  year: String, 
+  poster: String 
+});
+const movieModel = new mongoose.model('myMovies',movieSchema);
+
+app.get('/api/movies', async (req, res) => {
+    const movies = await movieModel.find({});
+    res.status(200).json({movies})
+});
+
+app.get('/api/movies/:id', async (req ,res)=>{
+    const movie = await movieModel.findById(req.params.id);
+    res.json(movie);
+  })
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -14,41 +36,16 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
-
-app.get('/api/movies', (req, res) => {
-    const movies = [
-        {
-            "Title": "Avengers: Infinity War",
-            "Year": "2018",
-            "imdbID": "tt4154756",
-            "Type": "movie",
-            "Poster": "https://example.com/poster1.jpg"
-        },
-        {
-            "Title": "Captain America: Civil War",
-            "Year": "2016",
-            "imdbID": "tt3498820",
-            "Type": "movie",
-            "Poster": "https://example.com/poster2.jpg"
-        },
-        {
-            "Title": "World War Z",
-            "Year": "2013",
-            "imdbID": "tt0816711",
-            "Type": "movie",
-            "Poster": "https://example.com/poster3.jpg"
-        }
-    ];
-    res.status(200).json({ myMovies:movies });
-});
-
-app.post('/api/movies',(req, res)=>{
+app.post('/api/movies',async (req, res)=>{
     console.log(req.body.title);
-    res.send("Movie Added!");
+    const {title, year, poster} = req.body;
+
+    const newMovie = new movieModel({title, year, poster});
+    await newMovie.save();
+
+    res.status(201).json({"message":"Movie Added!",Movie:newMovie});
 })
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

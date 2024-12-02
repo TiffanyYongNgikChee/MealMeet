@@ -10,12 +10,12 @@ const Food = () => {
       axios.get('http://localhost:4000/api/movies')
         .then((response) => {
           console.log(response.data);
-          setRecipes(response.data.myMovies);
+          setRecipes(response.data.movies);
         })
         .catch((error) => {
           console.log(error);
         });
-    });
+    },[]);
   return (
     <div>
       <h1>Hello From food</h1>

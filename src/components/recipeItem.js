@@ -9,11 +9,11 @@ const RecipeItem = (props)=> {
   return (
     <div>
       <Card>
-        <Card.Header>{props.myrecipe.Title}</Card.Header>
+        <Card.Header>{props.myrecipe.title}</Card.Header>
         <Card.Body>
           <blockquote className="blockquote mb-0">
-            <img src={props.myrecipe.Poster} alt={props.myrecipe.Title} />
-            <footer>{props.myrecipe.Year}</footer>
+            <img src={props.myrecipe.poster} alt={props.myrecipe.title} />
+            <footer>{props.myrecipe.year}</footer>
           </blockquote>
         </Card.Body>
       </Card>

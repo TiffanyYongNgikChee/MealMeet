@@ -6,7 +6,7 @@ import axios from "axios";
 const Food = () => {
     const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
+    const ReloadData = ()=>{
       axios.get('http://localhost:4000/api/movies')
         .then((response) => {
           console.log(response.data);
@@ -15,11 +15,15 @@ const Food = () => {
         .catch((error) => {
           console.log(error);
         });
+    }
+
+    useEffect(() => {
+      ReloadData();
     },[]);
   return (
     <div>
       <h1>Hello From food</h1>
-      <Recipe myRecipes={recipes}></Recipe>
+      <Recipe myRecipes={recipes} ReloadData={ReloadData} ></Recipe>
     </div>
   );
 }

@@ -24,28 +24,39 @@ const RecipeItem = (props)=> {
 
   return (
     <Card style={{ width: "25rem", margin: "15px" }}>
-    <Card.Img variant="top" src={props.myrecipe.poster} alt={props.myrecipe.title} />
-    <Card.Body>
-      <Card.Title>{props.myrecipe.title}</Card.Title>
-      <Card.Text>
-        {props.myrecipe.description.length > 100
-          ? `${props.myrecipe.description.substring(0, 100)}...`
-          : props.myrecipe.description}
-      </Card.Text>
-      <small className="text-muted">Year Created: {props.myrecipe.createdAt}</small>
-      <div style={{ marginTop: "10px" }}>
-        <Link to={`/details/${props.myrecipe._id}`} className="btn btn-secondary">
-            Details
-          </Link>
-        <Link to={`/edit/${props.myrecipe._id}`} className="btn btn-primary" style={{ marginRight: "10px" }}>
-          Edit
+      {/* Make the image clickable */}
+      <Link to={`/details/${props.myrecipe._id}`}>
+        <Card.Img variant="top" src={props.myrecipe.poster} alt={props.myrecipe.title} className="card-recipe-image"/>
+      </Link>
+      
+      <Card.Body>
+        {/* Make the title clickable with custom styles */}
+        <Link to={`/details/${props.myrecipe._id}`} className="recipe-title-link">
+          <Card.Title>{props.myrecipe.title}</Card.Title>
         </Link>
-        <Button className="btn btn-danger" onClick={handleDelete}>
-          Delete
-        </Button>
-      </div>
-    </Card.Body>
-  </Card>
+
+        {/* Display short description */}
+        <Card.Text>
+          {props.myrecipe.description.length > 100
+            ? `${props.myrecipe.description.substring(0, 100)}...`
+            : props.myrecipe.description}
+        </Card.Text>
+
+        <small className="text-muted">Year Created: {props.myrecipe.createdAt}</small>
+
+        <div style={{ marginTop: "10px" }}>
+          {/* Edit button */}
+          <Link to={`/edit/${props.myrecipe._id}`} className="btn btn-primary" style={{ marginRight: "10px" }}>
+            Edit
+          </Link>
+          
+          {/* Delete button */}
+          <Button className="btn btn-danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
 

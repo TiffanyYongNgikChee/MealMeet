@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Oi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&family=Heebo:wght@100..900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Oi&display=swap');
 
 .navbar-brand, .navbar-nav .nav-link {
   font-family: 'Chewy', cursive;
@@ -18,6 +18,32 @@
 rgb(215, 125, 15); color: 
 black; transform: 
   translateX(10px); }
+
+  /* Category Dropdown Styling */
+.category-selector {
+  margin: 20px 0;
+}
+
+.category-selector select {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.category-selector select:hover {
+  background-color: #e2e2e2;
+}
+/* Style for the link */
+.recipe-title-link {
+  color: black; /* Set the default color to black */
+  text-decoration: none; /* Remove the underline by default */
+}
+
+.recipe-title-link:hover {
+  color: rgb(183, 183, 69); /* Change color to yellow on hover */
+}
 
 .header 
 { 
@@ -45,6 +71,15 @@ black; transform:
   width: 300px;
   height: 300px; 
   margin: 0 10px;
+}
+/* Style for the image */
+.card-recipe-image {
+  transition: transform 0.3s ease;
+   /* Smooth transition */
+}
+
+.card-recipe-image:hover {
+  transform: scale(1.05); /* Slightly zoom in (scale) when hovered */
 }
 
 .header-section {
@@ -194,7 +229,7 @@ hr {
 .recipe-title {
   font-family: "Merriweather", serif;
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 900;
   color: #110f47;
   text-align: center; /* Centers the title text */
   grid-column: span 2; /* Make the title span across both columns */

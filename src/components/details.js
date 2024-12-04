@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
 
-const Details = () => {
+const Details = (props) => {
   const { id } = useParams(); // Get the recipe ID from the URL
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate(); // Hook for navigation
@@ -76,6 +79,7 @@ const Details = () => {
   </div>
 </div>
 <p>Created Time {recipe.createdAt}</p>
+
 </div>
   );
 };

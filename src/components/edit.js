@@ -70,7 +70,7 @@ const Edit = () => {
         axios.put('http://localhost:4000/api/recipes/'+id, recipe)
         .then((res)=>{
             console.log("Edited: "+res.data);
-            navigate('/edit');
+            navigate('/food');
         })
         .catch((err)=>{
             console.log(err);

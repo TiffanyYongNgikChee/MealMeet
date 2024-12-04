@@ -164,46 +164,71 @@ hr {
 }
 
 /* Recipe Details Container */
+.btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
 .recipe-details-container {
-  max-width: 1000px; /* Increase max-width for wider content */
-  margin: 20px auto;
-  padding: 20px;
-  color: #f5f5f5; /* Light text */
+  max-width: 5000px;
+  margin: 1px auto;
+  padding: 1px;
+  color: #f5f5f5;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns layout */
+  gap: 20px; /* Space between the columns */
 }
 
 /* Title and Image */
 .recipe-title {
-  font-family:  "Merriweather", serif;
+  font-family: "Merriweather", serif;
   font-size: 2.5rem;
-  margin-bottom: 20px;
   font-weight: bold;
   color: #110f47;
+  text-align: center; /* Centers the title text */
+  grid-column: span 2; /* Make the title span across both columns */
+  margin-bottom: 20px;
+  padding-top: 250px;
 }
 
 .recipe-image {
   display: block;
-  max-width: 70%;
+  max-width: 40rem;
   height: auto;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  border-radius: 0px;
+  margin-bottom: 2px;
+  margin-left: 150px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.recipe-description,
-.recipe-year,
-.recipe-categories {
+.recipe-description {
   color: #110f47;
   font-size: 1.2rem;
   margin-bottom: 10px;
+  text-align: center;
+  padding-left: 250px;
+  padding-right: 250px;
 }
 
 /* Ingredients Table */
-.ingredients-title{
+.ingredients-title {
   color: #110f47;
 }
+
 .ingredients-section {
-  
   margin-top: 30px;
+  padding: 100px;
 }
 
 .ingredients-table {
@@ -217,11 +242,13 @@ hr {
   border: 1px solid #f5f5f5;
   padding: 10px;
   text-align: left;
+
 }
 
 .ingredients-table th {
   background-color: #343a56; /* Slightly lighter blue */
   font-weight: bold;
+  
 }
 
 .ingredients-table td {
@@ -229,28 +256,32 @@ hr {
 }
 
 /* Steps Section */
+.steps-title{
+  color: #200e51;
+}
 .steps-section {
   margin-top: 30px;
-  background-color: #1a1a40; /* Dark blue background for steps */
-  padding: 20px;
+  background-color: #ffffff; /* Dark blue background for steps */
+  padding: 100px;
   border-radius: 10px;
 }
 
 .steps-list {
-  padding-left: 20px;
+  padding-left: 1px;
   list-style-position: inside;
 }
 
 .step-item {
   font-size: 1.1rem;
   margin-bottom: 10px;
-  color: #f5f5f5;
+  color: #200e51;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .recipe-details-container {
     padding: 15px;
+    grid-template-columns: 1fr; /* Stacks the content on smaller screens */
   }
 
   .recipe-title {

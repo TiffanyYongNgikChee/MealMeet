@@ -14,14 +14,24 @@ mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11'); /
 
 const recipeSchema = new mongoose.Schema({
   title: String,
-  createdYear: Number, 
   description: String,
   poster: String,
-  type: String,
-  ingredients: String,
-  preparation: String,
-  prepTime: Number,
-  cookTime: Number
+  categories: [String], // E.g., ["Italian", "Asian"]
+  ingredients: [
+    {
+      name: { type: String, required: true },
+      quantity: { type: String, required: true },
+      unit: { type: String },
+    },
+  ],
+  steps: [
+    {
+      step_number: { type: Number },
+      instruction: { type: String, required: true },
+    },
+  ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 
 });
 
@@ -34,17 +44,17 @@ app.get('/api/recipes', async (req, res) => {
 
 
   app.get('/api/recipes/:id', async (req ,res)=>{
-    const recipe = await movieModel.findById(req.params.id);
+    const recipe = await recipeModel.findById(req.params.id);
     res.json(recipe);
   })
 
   app.delete('/api/recipes/:id', async(req, res)=>{
-    const recipe = await movieModel.findByIdAndDelete(req.params.id);
+    const recipe = await recipeModel.findByIdAndDelete(req.params.id);
     res.send(recipe);
   })
   
   app.put('/api/recipes/:id', async (req, res)=>{
-    const recipe = await movieModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    const recipe = await recipeModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
     res.send(recipe);
   })
 
@@ -58,9 +68,9 @@ app.use(function(req, res, next) {
 
 app.post('/api/recipes',async (req, res)=>{
   console.log(req.body.title);
-  const {title, year,description, type, poster,ingredients,preparation} = req.body;
+  const {title, year,description, categories, poster,ingredients,steps} = req.body;
 
-  const newRecipe = new recipeModel({title, year,description, type, poster,ingredients,preparation});
+  const newRecipe = new recipeModel({title, year,description, categories, poster,ingredients,steps});
   await newRecipe.save();
 
   res.status(201).json({"message":"Recipe Added!",Recipe:newRecipe});

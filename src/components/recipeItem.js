@@ -12,7 +12,7 @@ const RecipeItem = (props)=> {
   const handleDelete = (e)=>{
     e.preventDefault();
 
-    axios.delete('http://localhost:4000/api/recipe/'+props.myrecipe._id)
+    axios.delete('http://localhost:4000/api/recipes/'+props.myrecipe._id)
     .then((res)=>{
       props.Reload();
     })
@@ -23,19 +23,19 @@ const RecipeItem = (props)=> {
   }
 
   return (
-    <div>
-      <Card>
-        <Card.Header>{props.myrecipe.title}</Card.Header>
-        <Card.Body>
-          <blockquote className="blockquote mb-0">
-            <img src={props.myrecipe.poster} alt={props.myrecipe.title} />
-            <footer>{props.myrecipe.year}</footer>
-          </blockquote>
-        </Card.Body>
-        <Link to={"/edit/" + props.myrecipe._id} className="btn btn-primary">Edit</Link>
-        <Button className="btn btn-danger" onClick={handleDelete}>Delete</Button>
-      </Card>
-    </div>
+    <Card style={{ width: "35rem", margin: "10px" }}>
+      <Card.Img variant="top" src={props.myrecipe.poster} alt={props.myrecipe.title} />
+      <Card.Body>
+        <Card.Title>{props.myrecipe.title}</Card.Title>
+        <Card.Text>{props.myrecipe.description}</Card.Text>
+        <Link to={"/edit/" + props.myrecipe._id} className="btn btn-primary">
+          Edit
+        </Link>
+        <Button className="btn btn-danger" onClick={handleDelete}>
+          Delete
+        </Button>
+      </Card.Body>
+    </Card>
   );
 }
 

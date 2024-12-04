@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Oi&display=swap');
 
 .navbar-brand, .navbar-nav .nav-link {
   font-family: 'Chewy', cursive;
@@ -15,7 +15,7 @@
  .navbar-nav 
  .nav-link:hover 
  { background-color:
-   darkorange; color: 
+   rgb(215, 125, 15); color: 
    black; transform: 
    translateX(10px); }
 
@@ -41,3 +41,104 @@
       { width: 300px;
         height: 300px; 
         margin: 0 10px; }
+
+        .header-section {
+          display: flex;
+          align-items: center;
+        }
+        
+        hr {
+          flex-grow: 1; /* Ensures the hr spans across the container */
+          border: none;
+          border-top: 2px solid #3a0909; /* Light gray line */
+          margin: 20px 10px; /* Spacing between the hr and h1 */
+
+        }
+        
+        .header-section h1 {
+          color: rgb(12, 12, 59); /* Dark blue text */
+          font-size: 50px; /* Adjust as per your design */
+          margin: 0; /* Remove default margin */
+          font-family: 'Chewy', cursive;
+        }
+
+        .recipe-form-container {
+          max-width: 800px;
+          margin: auto;
+          padding: 20px;
+          border-radius: 15px;
+          background-color: #fff7e6;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-title {
+          text-align: center;
+          font-family:  "Oi", serif;
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #ff6f61;
+        }
+        
+        .recipe-form .form-group {
+          margin-bottom: 15px;
+        }
+        
+        label {
+          font-family:  "Merriweather", serif;
+          font-size: 14px;
+          color: #555;
+        }
+        
+        .form-input {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          font-family:  "Merriweather", serif;
+        }
+        
+        .ingredient-row, .step-row {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+        }
+        
+        .add-btn, .remove-btn, .submit-btn {
+          font-family:  "Arial", serif;
+          font-size: 14px;
+          padding: 8px 12px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          margin-top: 5px;
+        }
+        
+        .add-btn {
+          background-color: #ffde6a;
+          color: #555;
+        }
+        
+        .add-btn:hover {
+          background-color: #ffd94d;
+        }
+        
+        .remove-btn {
+          background-color: #ff6f61;
+          color: white;
+        }
+        
+        .remove-btn:hover {
+          background-color: #ff4b3a;
+        }
+        
+        .submit-btn {
+          background-color: #7bc043;
+          color: white;
+          width: 100%;
+          font-size: 16px;
+        }
+        
+        .submit-btn:hover {
+          background-color: #63a636;
+        }
+        

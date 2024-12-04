@@ -1,38 +1,43 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&display=swap');
+
+.navbar-brand, .navbar-nav .nav-link {
+  font-family: 'Chewy', cursive;
+  font-size: 24px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.navbar-nav 
+.nav-link
+ { color: white; 
+  transition: transform 0.3s, 
+  background-color 0.3s, 
+  color 0.3s; } 
+ 
+ .navbar-nav 
+ .nav-link:hover 
+ { background-color:
+   darkorange; color: 
+   black; transform: 
+   translateX(10px); }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+   .header 
+   { text-align: center; 
+    margin-top: 20px; } 
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+   .app-name {
+    font-family: "Berkshire Swash", serif;
+     font-size: 100px; 
+     color: #110f47;
+     margin-left: 180px; 
+     margin-right: 180px; 
+    } 
+     
+     .images 
+     { display: flex; 
+      justify-content: center; 
+      align-items:center; 
+      margin-top: 20px; 
+      } 
+      .images img 
+      { width: 300px;
+        height: 300px; 
+        margin: 0 10px; }

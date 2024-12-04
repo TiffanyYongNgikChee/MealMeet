@@ -12,7 +12,7 @@ const RecipeItem = (props)=> {
   const handleDelete = (e)=>{
     e.preventDefault();
 
-    axios.delete('http://localhost:4000/api/movies/'+props.myrecipe._id)
+    axios.delete('http://localhost:4000/api/recipe/'+props.myrecipe._id)
     .then((res)=>{
       props.Reload();
     })

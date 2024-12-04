@@ -7,10 +7,10 @@ const Food = () => {
     const [recipes, setRecipes] = useState([]);
 
     const ReloadData = ()=>{
-      axios.get('http://localhost:4000/api/movies')
+      axios.get('http://localhost:4000/api/recipes')
         .then((response) => {
           console.log(response.data);
-          setRecipes(response.data.movies);
+          setRecipes(response.data.recipes);
         })
         .catch((error) => {
           console.log(error);
@@ -21,9 +21,13 @@ const Food = () => {
       ReloadData();
     },[]);
   return (
-    <div>
-      <h1>Hello From food</h1>
-      <Recipe myRecipes={recipes} ReloadData={ReloadData} ></Recipe>
+    <div class="header">
+      <div class="images">
+      <img src="https://twistedfood.s3.us-west-1.amazonaws.com/images/stove.svg" alt="Left Header Image"/>
+       <span class="app-name">MealMeet</span>
+       <img src="https://twistedfood.s3.us-west-1.amazonaws.com/images/pot.svg" alt="Right Header Image"/>
+      </div>
+      <div class="description">Need some recipe inspiration? Browse our complete list of Twisted recipes, delicious meals and dinner ideas from our kitchen to yours, to fit every palate, dietary requirement and taste.</div>
     </div>
   );
 }

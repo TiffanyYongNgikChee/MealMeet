@@ -4,16 +4,16 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const NavigationBar = () => {
   return (
-        <Navbar bg="dark" data-bs-theme="dark">
-          <Container>
-            <Navbar.Brand href="/">MealMeet</Navbar.Brand>
-            <Nav className="me-auto">
-              <Nav.Link href="/food">Home</Nav.Link>
-              <Nav.Link href="/details">Details</Nav.Link>
-              <Nav.Link href="/create">Create</Nav.Link>
-            </Nav>
-          </Container>
-      </Navbar>
+    <Navbar style={{ backgroundColor: 'orange' , borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }} variant="dark">
+      <Container> <Navbar.Brand href="/"> 
+       <img src="https://twistedfood.s3.us-west-1.amazonaws.com/images/pot.svg" width="40" height="40" className="d-inline-block align-top" alt="Logo" /> MealMeet </Navbar.Brand> 
+       <Nav className="me-auto"> 
+        <Nav.Link href="/food">Recipe</Nav.Link>
+         <Nav.Link href="/details">Lifestyle</Nav.Link>
+          <Nav.Link href="/create">Trending</Nav.Link> 
+          </Nav>
+      </Container> 
+    </Navbar>
   );
 };
 

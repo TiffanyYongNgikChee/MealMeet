@@ -12,32 +12,40 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11'); // Connect to MongoDB database
 
-const movieSchema = new mongoose.Schema({
+const recipeSchema = new mongoose.Schema({
   title: String,
-  year: String, 
-  poster: String 
+  createdYear: Number, 
+  description: String,
+  poster: String,
+  type: String,
+  ingredients: String,
+  preparation: String,
+  prepTime: Number,
+  cookTime: Number
+
 });
-const movieModel = new mongoose.model('myMovies',movieSchema);
 
-app.get('/api/movies', async (req, res) => {
-    const movies = await movieModel.find({});
-    res.status(200).json({movies})
+const recipeModel = new mongoose.model('myRecipes',recipeSchema);
+
+app.get('/api/recipes', async (req, res) => {
+  const recipes = await recipeModel.find({});
+  res.status(200).json({recipes})
 });
 
 
-app.get('/api/movies/:id', async (req ,res)=>{
-    const movie = await movieModel.findById(req.params.id);
-    res.json(movie);
+  app.get('/api/recipes/:id', async (req ,res)=>{
+    const recipe = await movieModel.findById(req.params.id);
+    res.json(recipe);
   })
 
-  app.delete('/api/movies/:id', async(req, res)=>{
-    const movie = await movieModel.findByIdAndDelete(req.params.id);
-    res.send(movie);
+  app.delete('/api/recipes/:id', async(req, res)=>{
+    const recipe = await movieModel.findByIdAndDelete(req.params.id);
+    res.send(recipe);
   })
   
-  app.put('/api/movies/:id', async (req, res)=>{
-    const movie = await movieModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
-    res.send(movie);
+  app.put('/api/recipes/:id', async (req, res)=>{
+    const recipe = await movieModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    res.send(recipe);
   })
 
 app.use(function(req, res, next) {
@@ -47,14 +55,15 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post('/api/movies',async (req, res)=>{
-    console.log(req.body.title);
-    const {title, year, poster} = req.body;
 
-    const newMovie = new movieModel({title, year, poster});
-    await newMovie.save();
+app.post('/api/recipes',async (req, res)=>{
+  console.log(req.body.title);
+  const {title, year,description, type, poster,ingredients,preparation} = req.body;
 
-    res.status(201).json({"message":"Movie Added!",Movie:newMovie});
+  const newRecipe = new recipeModel({title, year,description, type, poster,ingredients,preparation});
+  await newRecipe.save();
+
+  res.status(201).json({"message":"Recipe Added!",Recipe:newRecipe});
 })
 
 

@@ -23,19 +23,29 @@ const RecipeItem = (props)=> {
   }
 
   return (
-    <Card style={{ width: "35rem", margin: "10px" }}>
-      <Card.Img variant="top" src={props.myrecipe.poster} alt={props.myrecipe.title} />
-      <Card.Body>
-        <Card.Title>{props.myrecipe.title}</Card.Title>
-        <Card.Text>{props.myrecipe.description}</Card.Text>
-        <Link to={"/edit/" + props.myrecipe._id} className="btn btn-primary">
+    <Card style={{ width: "25rem", margin: "15px" }}>
+    <Card.Img variant="top" src={props.myrecipe.poster} alt={props.myrecipe.title} />
+    <Card.Body>
+      <Card.Title>{props.myrecipe.title}</Card.Title>
+      <Card.Text>
+        {props.myrecipe.description.length > 100
+          ? `${props.myrecipe.description.substring(0, 100)}...`
+          : props.myrecipe.description}
+      </Card.Text>
+      <small className="text-muted">Year Created: {props.myrecipe.createdAt}</small>
+      <div style={{ marginTop: "10px" }}>
+        <Link to={`/details/${props.myrecipe._id}`} className="btn btn-secondary">
+            Details
+          </Link>
+        <Link to={`/edit/${props.myrecipe._id}`} className="btn btn-primary" style={{ marginRight: "10px" }}>
           Edit
         </Link>
         <Button className="btn btn-danger" onClick={handleDelete}>
           Delete
         </Button>
-      </Card.Body>
-    </Card>
+      </div>
+    </Card.Body>
+  </Card>
   );
 }
 

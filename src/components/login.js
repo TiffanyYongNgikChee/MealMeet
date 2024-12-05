@@ -1,58 +1,58 @@
-import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
-const LoginPage = ({ setUser }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:4000/api/login", {
-        username,
-        password,
-      });
-      setUser(res.data); // Set logged-in user
-      navigate("/dashboard"); // Redirect to dashboard
-    } catch (err) {
-      setError("Invalid username or password");
-    }
-  };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const credentials = { email, password };
 
-  return (
-    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            style={{ display: "block", width: "100%", padding: "10px" }}
-            required
-          />
+        axios.post('http://localhost:4000/api/login', credentials)
+            .then((res) => {
+                console.log(res.data);  // Success response
+                setSuccessMessage("Login successful!");
+                localStorage.setItem('token', res.data.token); // Store token for authentication
+            })
+            .catch((err) => {
+                console.error("Error:", err.response ? err.response.data : err.message);
+                setError(err.response ? err.response.data.message : err.message);
+            });
+    };
+
+    return (
+        <div>
+            <h3>Login</h3>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Email: </label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Password: </label>
+                    <input
+                        type="password"
+                        className="form-control"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <input type="submit" value="Login" />
+                </div>
+            </form>
         </div>
-        <div style={{ marginBottom: "15px" }}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ display: "block", width: "100%", padding: "10px" }}
-            required
-          />
-        </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" style={{ padding: "10px 20px" }}>
-          Login
-        </button>
-      </form>
-    </div>
-  );
+    );
 };
 
-export default LoginPage;
+export default Login;

@@ -11,6 +11,25 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const authenticateToken = (req, res, next) => {
+const token = req.headers['authorization'];
+  if (!token) return res.status(401).json({ message: "Access Denied" });
+
+  try {
+      const verified = jwt.verify(token, "your_secret_key");
+      req.user = verified; // Add user details to the request
+      next();
+  } catch (err) {
+      res.status(400).json({ message: "Invalid Token" });
+  }
+};
+
+// Example of a protected route
+app.get('/api/protected', authenticateToken, (req, res) => {
+  res.status(200).json({ message: "This is a protected route", user: req.user });
+});
+
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11'); // Connect to MongoDB database
 
@@ -131,6 +150,35 @@ app.get('/api/register/:id', async (req ,res)=>{
 const users = await userModel.findById(req.params.id);
 res.json(users);
 })
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Check if the user exists
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    // Compare provided password with the hashed password
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      "your_secret_key", // Replace with a strong secret key in an environment variable
+      { expiresIn: "1h" }
+    );
+
+    res.status(200).json({ message: "Login successful", token });
+  } catch (err) {
+    res.status(500).json({ message: "Server error, please try again later" });
+  }
+});
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

@@ -15,8 +15,13 @@ const Register = () => {
         console.log(user);
 
         axios.post('http://localhost:4000/api/register',user)
-        .then((res)=>{console.log(res.data)})
-        .catch();
+        .then((res) => {
+            console.log(res.data);  // Success response from backend
+        })
+        .catch((err) => {
+            console.error("Error:", err.response ? err.response.data : err.message);
+            setError(err.response ? err.response.data.message : err.message);  // Display the error message
+        });
     }
 
     return (

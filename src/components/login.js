@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,9 +14,16 @@ const Login = () => {
 
         axios.post('http://localhost:4000/api/login', credentials)
             .then((res) => {
-                console.log(res.data);  // Success response
-                setSuccessMessage("Login successful!");
-                localStorage.setItem('token', res.data.token); // Store token for authentication
+                console.log(res.data);
+                const { token, username, email } = res.data;
+
+                // Store token and user details in localStorage or state
+                localStorage.setItem("token", token);
+                localStorage.setItem("username", username);
+                localStorage.setItem("email", email);
+
+                // Navigate to dashboard
+                navigate("/dashboard");
             })
             .catch((err) => {
                 console.error("Error:", err.response ? err.response.data : err.message);
@@ -24,33 +32,36 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h3>Login</h3>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Email: </label>
-                    <input
-                        type="email"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Password: </label>
-                    <input
-                        type="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <input type="submit" value="Login" />
-                </div>
-            </form>
+        <div className="login-page">
+            <div className="login-card">
+                <h3>Login</h3>
+                {error && <p className="error">{error}</p>}
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label>Email:</label>
+                        <input
+                            type="email"
+                            className="form-control"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Password:</label>
+                        <input
+                            type="password"
+                            className="form-control"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit" className="login-btn">Login</button>
+                </form>
+                <p>
+                    Don't have an account?{" "}
+                    <Link to="/register" className="register-link">Create one</Link>
+                </p>
+            </div>
         </div>
     );
 };

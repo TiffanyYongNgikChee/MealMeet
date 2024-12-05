@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/navigationBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import './Login.css'
+import "./Register.css";
 import Dashboard from "./components/dashboard";
 import Register from "./components/register";
 

@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 4000;
+const bcrypt = require("bcrypt"); //Secures passwords by hashing and verifying them.
+const jwt = require("jsonwebtoken"); //Generates and verifies tokens for user authentication.
 
 const cors = require('cors');
 app.use(cors());
@@ -97,7 +99,38 @@ app.post('/api/recipes',async (req, res)=>{
 
   res.status(201).json({"message":"Recipe Added!",Recipe:newRecipe});
 })
- 
+
+app.post('/api/register', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Check if the user already exists
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User with this email already exists" });
+    }
+
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new userModel({ username, email, password: hashedPassword });
+    await newUser.save();
+
+    res.status(201).json({ message: "User successfully registered", User: newUser });
+  } catch (err) {
+    res.status(500).json({ message: "Server error, please try again later" });
+  }
+});
+
+app.get('/api/register', async (req, res) => {
+  const users = await userModel.find({});
+  res.status(200).json({users})
+});
+
+app.get('/api/register/:id', async (req ,res)=>{
+const users = await userModel.findById(req.params.id);
+res.json(users);
+})
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

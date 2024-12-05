@@ -8,6 +8,7 @@ import NavigationBar from './components/navigationBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import Dashboard from "./components/dashboard";
+import Register from "./components/register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/edit/:id' element={<Edit />} />
         <Route path="/details/:id" element={<Details />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>

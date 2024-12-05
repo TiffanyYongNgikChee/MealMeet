@@ -19,6 +19,27 @@ rgb(215, 125, 15); color:
 black; transform: 
   translateX(10px); }
 
+/* Style for the user icon in the navbar */
+.user-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px; /* Space it slightly from the edge */
+}
+
+.user-icon-img {
+  width: 30px; /* Adjust size as necessary */
+  height: 30px;
+  filter: invert(1); /* Invert color for dark navbar */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth animation */
+  cursor: pointer;
+}
+
+.user-icon-img:hover {
+  transform: scale(1.2); /* Slightly enlarge the icon on hover */
+  opacity: 0.8; /* Make it slightly transparent */
+}
+
   /* Category Dropdown Styling */
 .category-selector {
   margin: 20px 0;

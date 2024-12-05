@@ -12,6 +12,29 @@ app.use(bodyParser.json());
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://Admin:Admin@cluster0.uxdft.mongodb.net/DB11'); // Connect to MongoDB database
 
+const userSchema = new mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      minlength: 3,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/\S+@\S+\.\S+/, "Please enter a valid email address"],
+    },
+    password: {
+      type: String,
+      required: true,
+      minlength: 6,
+    }
+  }
+);
+
 const recipeSchema = new mongoose.Schema({
   title: String,
   description: String,
@@ -34,7 +57,7 @@ const recipeSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 
 });
-
+const userModel = new mongoose.model('myUsers',userSchema);
 const recipeModel = new mongoose.model('myRecipes',recipeSchema);
 
 app.get('/api/recipes', async (req, res) => {
@@ -42,21 +65,20 @@ app.get('/api/recipes', async (req, res) => {
   res.status(200).json({recipes})
 });
 
+app.get('/api/recipes/:id', async (req ,res)=>{
+  const recipe = await recipeModel.findById(req.params.id);
+  res.json(recipe);
+})
 
-  app.get('/api/recipes/:id', async (req ,res)=>{
-    const recipe = await recipeModel.findById(req.params.id);
-    res.json(recipe);
-  })
-
-  app.delete('/api/recipes/:id', async(req, res)=>{
-    const recipe = await recipeModel.findByIdAndDelete(req.params.id);
-    res.send(recipe);
-  })
+app.delete('/api/recipes/:id', async(req, res)=>{
+  const recipe = await recipeModel.findByIdAndDelete(req.params.id);
+  res.send(recipe);
+})
   
-  app.put('/api/recipes/:id', async (req, res)=>{
-    const recipe = await recipeModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
-    res.send(recipe);
-  })
+app.put('/api/recipes/:id', async (req, res)=>{
+  const recipe = await recipeModel.findByIdAndUpdate(req.params.id, req.body, {new:true});
+  res.send(recipe);
+})
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -75,7 +97,7 @@ app.post('/api/recipes',async (req, res)=>{
 
   res.status(201).json({"message":"Recipe Added!",Recipe:newRecipe});
 })
-
+ 
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

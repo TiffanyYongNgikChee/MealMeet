@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   return (
@@ -11,7 +12,16 @@ const NavigationBar = () => {
         <Nav.Link href="/food">Recipe</Nav.Link>
          <Nav.Link href="/details">Lifestyle</Nav.Link>
           <Nav.Link href="/create">Trending</Nav.Link> 
-          </Nav>
+      </Nav>
+      <Nav>
+          <Nav.Link href="/login" className="user-icon">
+            <img 
+              src="https://www.svgrepo.com/show/381806/user.svg" 
+              alt="Login or Register" 
+              className="user-icon-img" 
+            />
+          </Nav.Link>
+        </Nav>
       </Container> 
     </Navbar>
   );

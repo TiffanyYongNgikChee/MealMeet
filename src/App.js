@@ -11,9 +11,11 @@ import './Login.css'
 import "./Register.css";
 import Dashboard from "./components/dashboard";
 import Register from "./components/register";
+import { AuthProvider } from "./components/AuthContext"; // Import AuthProvider correctly
 
 function App() {
   return (
+    <AuthProvider>
     <Router>
       <NavigationBar />
       <Routes>
@@ -26,6 +28,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 

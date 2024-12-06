@@ -173,7 +173,23 @@ app.post('/api/login', async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(200).json({ message: "Login successful", token });
+    res.status(200).json({ message: "Login successful", token ,
+      username: user.username, // Include username here
+      email: user.email,});
+  } catch (err) {
+    res.status(500).json({ message: "Server error, please try again later" });
+  }
+});
+app.get('/api/login/:username', async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await userModel.findOne({ username });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({ username: user.username, email: user.email });
   } catch (err) {
     res.status(500).json({ message: "Server error, please try again later" });
   }

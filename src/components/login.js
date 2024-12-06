@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
+import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import AuthContext from "./AuthContext";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -21,6 +24,10 @@ const Login = () => {
                 localStorage.setItem("token", token);
                 localStorage.setItem("username", username);
                 localStorage.setItem("email", email);
+                console.log("Saved username in localStorage:", localStorage.getItem("username"));
+                
+                // Update AuthContext state
+                login({ username, email });
 
                 // Navigate to dashboard
                 navigate("/dashboard");

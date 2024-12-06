@@ -27,7 +27,7 @@ const Login = () => {
                 console.log("Saved username in localStorage:", localStorage.getItem("username"));
                 
                 // Update AuthContext state
-                login({ username, email });
+                login({ username, email },token);
 
                 // Navigate to dashboard
                 navigate("/dashboard");

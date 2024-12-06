@@ -195,6 +195,25 @@ app.get('/api/login/:username', async (req, res) => {
   }
 });
 
+// This route should verify the JWT token sent in the request header
+app.get('/api/verify-token', (req, res) => {
+  const token = req.headers['authorization']?.split(' ')[1]; // Extract token from the Authorization header
+  if (!token) {
+    return res.status(400).json({ message: "Token missing" });
+  }
+
+  try {
+    // Verify the token
+    const verified = jwt.verify(token, "your_secret_key"); // Use your actual secret key here
+    res.status(200).json({ message: "Token is valid", user: verified });
+  } catch (err) {
+    console.error("Error verifying token:", err);
+    res.status(400).json({ message: "Invalid token" });
+  }
+});
+
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

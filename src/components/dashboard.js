@@ -4,14 +4,16 @@ import AuthContext from "./AuthContext";
 import axios from "axios";
 
 const Dashboard = () => {
-  const { isLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn,user } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // If not logged in, navigate to login page
   useEffect(() => {
-    if (!isLoggedIn) {
+    // Fetch user data based on token
+    const token = localStorage.getItem("token"); // Get token from localStorage
+    if (!token) {
       navigate("/login");
       return;
     }
@@ -19,7 +21,7 @@ const Dashboard = () => {
     // Fetch user data from the backend
     const username = localStorage.getItem("username"); // Get username from localStorage
     console.log("Retrieved username from localStorage:", username);
-    
+
     if (username) {
       axios
         .get(`http://localhost:4000/api/login/${username}`) // Fetch user data based on username

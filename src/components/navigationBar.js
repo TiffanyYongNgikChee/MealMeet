@@ -2,8 +2,13 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
+import AuthContext from "./AuthContext"; 
+import { useContext } from "react";
 
 const NavigationBar = () => {
+
+  const { isLoggedIn } = useContext(AuthContext); // Get the login status from AuthContext
+
   return (
     <Navbar style={{ backgroundColor: 'orange' , borderBottomLeftRadius: '15px', borderBottomRightRadius: '15px' }} variant="dark">
       <Container> <Navbar.Brand href="/"> 
@@ -14,7 +19,7 @@ const NavigationBar = () => {
           <Nav.Link href="/create">Trending</Nav.Link> 
       </Nav>
       <Nav>
-          <Nav.Link href="/login" className="user-icon">
+          <Nav.Link href={isLoggedIn ? "/dashboard" : "/login"} className="user-icon">
             <img 
               src="https://www.svgrepo.com/show/381806/user.svg" 
               alt="Login or Register" 

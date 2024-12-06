@@ -4,13 +4,14 @@ import AuthContext from "./AuthContext";
 import axios from "axios";
 
 const Dashboard = () => {
-  const { isLoggedIn,user } = useContext(AuthContext);
+  const { isLoggedIn,user, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   // If not logged in, navigate to login page
   useEffect(() => {
+
     // Fetch user data based on token
     const token = localStorage.getItem("token"); // Get token from localStorage
     if (!token) {
@@ -41,6 +42,15 @@ const Dashboard = () => {
     console.log("User Data State:", userData);
   }, [userData]);
 
+  // Log out function
+  const handleLogout = () => {
+    localStorage.removeItem("token");  // Remove token from localStorage
+    localStorage.removeItem("username");  // Remove username from localStorage
+    localStorage.removeItem("email");  // Remove email from localStorage
+    logout(); // Call the logout function from AuthContext
+    navigate("/login"); // Redirect to the login page
+  };
+
   // If there is an error fetching data or no data, show an error message
   if (error) {
     return <div>{error}</div>;
@@ -53,6 +63,9 @@ const Dashboard = () => {
         <h1>Welcome to the Dashboard</h1>
         <p>Username: {userData.username}</p>
         <p>Email: {userData.email}</p>
+
+        {/* Log Out Button */}
+        <button onClick={handleLogout}>Log Out</button>
       </div>
     );
   }

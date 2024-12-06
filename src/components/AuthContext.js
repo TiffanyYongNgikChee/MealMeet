@@ -33,18 +33,19 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = (userData, token) => {
+  // Login function to set the user data in context
+  const login = (userData) => {
     setIsLoggedIn(true);
     setUser(userData);
-    localStorage.setItem("token", token);
-    localStorage.setItem("username", userData.username);
-    localStorage.setItem("email", userData.email);
   };
 
+  // Logout function to clear the user data from context and localStorage
   const logout = () => {
     setIsLoggedIn(false);
     setUser(null);
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
   };
 
   return (

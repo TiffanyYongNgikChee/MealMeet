@@ -5,20 +5,140 @@
     padding: 20px;
   }
   
-  .card-container {
+  .card-container-dashboard {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 3fr);
     gap: 20px;
   }
   
-  .card {
+  .card-dashboard {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  button {
+  .button-dashboard {
     margin-left: 10px;
   }
   
+/* Styling for the UserInfoCard component */
+.user-page{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  
+}
+.user-info-card {
+  background-color: #f0f4f8; /* Light modern color (light grey-blue) */
+  border-radius: 12px; /* Slightly more rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 30px; /* Increase padding for a bigger card */
+  width: 500px; /* Increased width to make the card bigger */
+  max-width: 100%;
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover effect */
+  margin-bottom: 20px;
+}
+
+.user-info-card:hover {
+  transform: translateY(-8px); /* Elevate the card more on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Increased shadow on hover */
+}
+
+.user-info-card__content {
+  display: flex;
+  justify-content: space-between; /* Place profile image on the right */
+  align-items: center;
+}
+
+.user-info-card__info {
+  flex: 1; /* Allow text section to take up available space */
+  padding-right: 30px; /* Space between text and profile picture */
+}
+
+.user-info-card__profile {
+  flex-shrink: 0; /* Prevent profile picture from shrinking */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info-card__profile-pic {
+  width: 200px; 
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #382f21; /* Thicker border around profile picture */
+}
+
+.user-info-card__title {
+  font-size: 28px; /* Larger font size for title */
+  font-weight: 600;
+  color: #333333; /* Dark text for title */
+  margin-bottom: 15px; /* Add more space after title */
+}
+
+.user-info-card__label {
+  font-size: 16px; /* Slightly larger font size for labels */
+  font-weight: 500;
+  color: #888888; /* Lighter grey color for labels */
+  margin-bottom: 8px; /* More space between label and data */
+}
+
+.user-info-card__data {
+  font-size: 18px; /* Larger font size for data */
+  font-weight: 600;
+  color: #333333; /* Dark text for data */
+  margin-bottom: 15px; /* More space between data fields */
+}
+
+/* Add some spacing between multiple cards */
+.user-info-card + .user-info-card {
+  margin-top: 20px;
+}
+
+/* Create Button - Special Style */
+button.create-btn {
+  background: linear-gradient(135deg, #ff6f61, #f5a623); /* Gradient background */
+  color: white;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 35px;
+}
+
+/* Delete Button - Special Style */
+button.delete-btn {
+  background: linear-gradient(135deg, #f44336, #e91e63); /* Gradient background */
+  color: white;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 35px;
+}
+
+/* Log Out Button - Style */
+.button-dashboard {
+  background-color: #4caf50; /* Green background for logout */
+  color: white;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 35px;
+  border: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+/* Hover effect for log out button */
+.button-dashboard:hover {
+  background-color: #388e3c; /* Darker green on hover */
+  transform: translateY(-4px); /* Lift effect */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Add spacing between buttons */
+button + button {
+  margin-top: 15px;
+}

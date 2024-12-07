@@ -121,8 +121,18 @@ hr {
           margin: 0; /* Remove default margin */
           font-family: 'Chewy', cursive;
         }
-
+        .create-page{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-image: url('https://wallpaperaccess.com/full/9109186.jpg');
+          background-size: cover;
+          background-position: center;
+          margin: 0; 
+        }
         .recipe-form-container {
+          
           max-width: 800px;
           margin: auto;
           padding: 20px;
@@ -234,7 +244,16 @@ hr {
 .btn-secondary:hover {
   background-color: #5a6268;
 }
-
+.edit-page{
+  display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200vh;
+          background-image: url('https://sophiafoods.com/cdn/shop/files/homesquares-05_979x637.png?v=1614286429');
+          background-size: cover;
+          background-position: center;
+          margin: 0; 
+}
 .recipe-details-container {
   max-width: 5000px;
   margin: 1px auto;

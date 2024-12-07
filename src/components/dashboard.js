@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import UserInfoCard from "./UserInfoCard";
-import CreateAndStatsCard from "./CreateAndStatsCard";
 import RecipeManagementCard from "./RecipeManagementCard";
 
 const Dashboard = () => {
@@ -13,6 +12,11 @@ const Dashboard = () => {
   const [recipes, setRecipes] = useState([]);
 
   const navigate = useNavigate();
+
+  // Handle the "Create" button click event to navigate to the /create page
+  const handleCreateClick = () => {
+    navigate('/create');
+  };
 
   // If not logged in, navigate to login page
   useEffect(() => {
@@ -65,18 +69,18 @@ const Dashboard = () => {
   if (userData) {
     return (
       <div className="dashboard">
-        <div className="card-container">
+        <div className="card-container-dashboard">
           {/* User Info Card */}
           {userData && <UserInfoCard userData={userData} />}
   
-          {/* Create & Stats Card */}
-          <CreateAndStatsCard recipes={recipes} />
+          {/* "Create" Button with onClick event to navigate */}
+          <button className="create-btn" onClick={handleCreateClick}>Create</button>
   
           {/* Recipe Management Card */}
           <RecipeManagementCard recipes={recipes} reloadRecipes={() => setRecipes([])} />
         </div>
         {/* Log Out Button */}
-        <button onClick={handleLogout}>Log Out</button>
+        <button className="button-dashboard" onClick={handleLogout}>Log Out</button>
 
       </div>
     );

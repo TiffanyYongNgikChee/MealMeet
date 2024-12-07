@@ -65,6 +65,7 @@ const Create = () => {
     }
 
     return  (
+      <div className="create-page">
         <div className="recipe-form-container">
           <h3 className="form-title">Create Recipe</h3>
           <form onSubmit={handleSubmit} className="recipe-form">
@@ -196,6 +197,7 @@ const Create = () => {
             </button>
           </form>
         </div>
+      </div>
       );
     };
 export default Create;

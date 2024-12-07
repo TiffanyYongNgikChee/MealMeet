@@ -79,6 +79,7 @@ const Edit = () => {
     }
 
     return (
+        <div className='edit-page'>
         <div className="recipe-form-container">
         <h3 className="form-title">Edit Recipe</h3>
             <form onSubmit={handleSubmit}>
@@ -182,6 +183,7 @@ const Edit = () => {
 
             <button type="submit">Edit</button>
             </form>
+        </div>
     </div>
     );
 }

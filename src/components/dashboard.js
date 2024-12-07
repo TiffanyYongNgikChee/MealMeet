@@ -2,11 +2,16 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import axios from "axios";
+import UserInfoCard from "./UserInfoCard";
+import CreateAndStatsCard from "./CreateAndStatsCard";
+import RecipeManagementCard from "./RecipeManagementCard";
 
 const Dashboard = () => {
   const { isLoggedIn,user, logout } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
+  const [recipes, setRecipes] = useState([]);
+
   const navigate = useNavigate();
 
   // If not logged in, navigate to login page
@@ -59,13 +64,20 @@ const Dashboard = () => {
   // If user data is loaded, show the dashboard
   if (userData) {
     return (
-      <div>
-        <h1>Welcome to the Dashboard</h1>
-        <p>Username: {userData.username}</p>
-        <p>Email: {userData.email}</p>
-
+      <div className="dashboard">
+        <div className="card-container">
+          {/* User Info Card */}
+          {userData && <UserInfoCard userData={userData} />}
+  
+          {/* Create & Stats Card */}
+          <CreateAndStatsCard recipes={recipes} />
+  
+          {/* Recipe Management Card */}
+          <RecipeManagementCard recipes={recipes} reloadRecipes={() => setRecipes([])} />
+        </div>
         {/* Log Out Button */}
         <button onClick={handleLogout}>Log Out</button>
+
       </div>
     );
   }

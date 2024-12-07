@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import './Login.css'
 import "./Register.css";
+import "./Dashboard.css";
 import Dashboard from "./components/dashboard";
 import Register from "./components/register";
 import { AuthProvider } from "./components/AuthContext"; // Import AuthProvider correctly

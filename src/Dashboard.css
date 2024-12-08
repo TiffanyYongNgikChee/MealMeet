@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&family=Heebo:wght@900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Oi&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+
 .dashboard {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-weight:300;
+    font-style: normal;
     background-color: #eaecee;
     color: #333;
   }

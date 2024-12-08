@@ -1,17 +1,23 @@
-import RecipeItem from "./recipeItem";
+import React from 'react';
+import RecipeItem from './recipeItem';
 
 const Recipe = (props) => {
-    return (
-      <div className="recipe-grid">
-        {props.myRecipes.map((recipe) => (
-          <RecipeItem
-            myrecipe={recipe}
-            key={recipe._id} // Use _id instead of imdbID if that's your unique identifier
-            Reload={props.ReloadData}
-          />
-        ))}
-      </div>
-    );
+  // Optimistic update for the recipe list
+  const handleReload = (updatedRecipes) => {
+    props.ReloadData(updatedRecipes);  // Pass updated recipes to the parent (Food)
   };
+
+  return (
+    <div className="recipe-grid">
+      {props.myRecipes.map((recipe) => (
+        <RecipeItem
+          key={recipe._id}
+          myrecipe={recipe}
+          Reload={handleReload} // Pass handleReload to RecipeItem
+        />
+      ))}
+    </div>
+  );
+};
 
 export default Recipe;

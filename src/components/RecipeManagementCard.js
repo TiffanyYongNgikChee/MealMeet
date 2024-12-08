@@ -33,13 +33,14 @@ const RecipeManagementCard = ({ recipes, reloadRecipes }) => {
 
   return (
     <div className="card">
-      <h2>Manage Recipes</h2>
+        <h2 className="manage-title">Manage Your Culinary Creations!</h2>
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
             <span>{recipe.title}</span>
-            <button onClick={() => handleEdit(recipe._id)}>Edit</button>
-            <button onClick={() => handleDelete(recipe._id)}>Delete</button>
+            <p>Description: {recipe.description}</p>
+            <button className="button-manage" onClick={() => handleEdit(recipe._id)}>Edit</button>
+            <button className="button-manage" onClick={() => handleDelete(recipe._id)}>Delete</button>
           </li>
         ))}
       </ul>

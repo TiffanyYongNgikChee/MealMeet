@@ -1,4 +1,5 @@
 import axios from "axios";
+import Recipe from "./recipe";
 
 const RecipeManagementCard = ({ recipes, reloadRecipes }) => {
   const handleDelete = (id) => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
 import axios from "axios";
+import { Bar } from "react-chartjs-2"; // Import Chart.js component
+import Chart from "chart.js/auto"; // Necessary for Chart.js
 import UserInfoCard from "./UserInfoCard";
 import RecipeManagementCard from "./RecipeManagementCard";
 
@@ -10,6 +12,7 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [chartData, setChartData] = useState(null); // State for graph data
 
   const navigate = useNavigate();
 
@@ -38,6 +41,7 @@ const Dashboard = () => {
         .then((response) => {
           console.log("Fetched user data:", response.data); // Log the fetched data
           setUserData(response.data); // Store user data from API in state
+          
         })
         .catch((err) => {
           console.error("Error fetching user data:", err);
@@ -46,10 +50,49 @@ const Dashboard = () => {
     }
   }, [isLoggedIn, navigate]);
 
-  // Log userData to check if it has been set
   useEffect(() => {
-    console.log("User Data State:", userData);
-  }, [userData]);
+    axios
+      .get("http://localhost:4000/api/recipes")
+      .then((response) => {
+        console.log("Fetched recipes:", response.data.recipes);
+        setRecipes(response.data.recipes); // Store the recipes
+        processChartData(response.data.recipes); // Process data for the chart
+      })
+      .catch((error) => {
+        console.error("Error fetching recipes:", error);
+        setError("Failed to load recipes.");
+      });
+  }, []); // Empty dependency array means it runs once when the component mounts.
+  
+
+  // Process data for the graph
+  const processChartData = (recipes) => {
+    console.log("Processing recipes for chart:", recipes);
+    const categoryCounts = recipes.reduce((counts, recipe) => {
+      recipe.categories.forEach((category) => {
+        counts[category] = (counts[category] || 0) + 1;
+      });
+      return counts;
+    }, {});
+
+    const labels = Object.keys(categoryCounts);
+    const data = Object.values(categoryCounts).map(
+      (count) => (count / recipes.length) * 100
+    ); // Calculate percentages
+
+    setChartData({
+      labels,
+      datasets: [
+        {
+          label: "Recipe Categories (%)",
+          data,
+          backgroundColor: "rgba(75,192,192,0.6)",
+          borderColor: "rgba(75,192,192,1)",
+          borderWidth: 1,
+        },
+      ],
+    });
+  };
 
   // Log out function
   const handleLogout = () => {
@@ -75,10 +118,18 @@ const Dashboard = () => {
   
           {/* "Create" Button with onClick event to navigate */}
           <button className="create-btn" onClick={handleCreateClick}>Create</button>
-  
+          
+          {/* Display Chart */}
+          {chartData && (
+            <div style={{ width: "600px", margin: "20px auto" }}>
+              <Bar data={chartData} options={{ maintainAspectRatio: false }} />
+            </div>
+          )}
+
           {/* Recipe Management Card */}
           <RecipeManagementCard recipes={recipes} reloadRecipes={() => setRecipes([])} />
         </div>
+        
         {/* Log Out Button */}
         <button className="button-dashboard" onClick={handleLogout}>Log Out</button>
 

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Chewy&family=Heebo:wght@900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Oi&family=Oswald:wght@200..700&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* Food News Container */
+.food-news-container {
+    width: 100%;
+    height: 100%; /* Make container fill the screen */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* Food News Title */
+.food-news-title {
+    font-family: "Oi", serif;
+    color: #191059; /* Blue */
+    font-size: 2.5em;
+    margin: 20px; /* Keep some margin for title readability */
+    text-align: left;
+}
+
+/* Food News Grid */
+.food-news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px; /* Remove gaps between items */
+    flex-grow: 1; /* Ensure grid takes all available space */
+}
+
+/* Food News Item */
+.food-news-item {
+    background-color: #0f1d42; /* Dark Blue */
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.food-news-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Food News Poster */
+.food-news-poster {
+    width: 100%;
+    height: 100%; /* Cover full height of the grid cell */
+    object-fit: cover;
+    flex-grow: 1;
+}
+
+/* Food News Topic */
+.food-news-topic {
+    color: #1d0938;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold 700;
+    font-style: normal;
+    font-size: 2em;
+    padding: 10px 15px;
+    background-color: #FFF;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}

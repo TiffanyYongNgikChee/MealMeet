@@ -2,48 +2,111 @@
 .poster-carousel {
     position: relative;
     width: 100%;
-    height: 50vh; /* Half screen height */
+    height: 60vh; /* Half screen height */
     overflow: hidden;
     background-color: rgb(250, 211, 54); /* Base color for poster */
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  /* Carousel Slide */
-  .carousel-slide {
+    margin-top: 20px;
+}
+
+/* Carousel Slide */
+.carousel-slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: flex; /* Flex layout for split screen */
+    justify-content: space-between; /* Space between the left and right columns */
     align-items: center;
-  }
-  
-  .carousel-slide.active {
+}
+
+.carousel-slide.active {
     opacity: 1;
-  }
-  
-  /* Carousel Description */
-  .carousel-description {
+}
+
+/* Left Side: Description */
+.carousel-description {
+    flex: 1; /* Take up 60% of the width */
     color: #170d43;
     padding: 20px;
-    border-radius: 10px;
+    text-align: left; /* Align text to the left */
+}
+
+.carousel-description h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.carousel-description p {
+    font-size: 1.2em;
+}
+
+/* Right Side: Image */
+.carousel-image {
+    flex: 0.4; /* Take up 40% of the width */
+    height: 80%;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0px;
+    margin-right: 50px;
+}
+
+.home-title{
+    font-family: "Oi", serif;
+    color: #191059; /* Blue */
+    font-size: 2.5em;
+    margin: 20px; /* Keep some margin for title readability */
+    text-align: left;
+}
+
+.latest-recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0px;
+  }
+  
+  .recipe-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
   }
   
-  .carousel-description h2 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+  .recipe-image-home {
+    width: 500px;
+    height: 300px;
+    aspect-ratio: 16 / 9; /* Maintain landscape ratio */
+    object-fit: cover;    /* Scale and crop image to fit */
+    object-position: center; /* Center the image */
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
   }
   
-  .carousel-description p {
-    font-size: 1.2em;
+  .recipe-image-home:hover {
+    transform: scale(1.05);
+  }
+  
+  .recipe-info {
+    margin-top: 10px;
+  }
+  
+  .recipe-info h3 {
+    margin: 5px 0;
+    font-size: 1.2rem;
+  }
+  
+  .recipe-info p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .text-muted {
+    font-size: 0.8rem;
+    color: #888;
   }

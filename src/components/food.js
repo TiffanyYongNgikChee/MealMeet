@@ -2,6 +2,7 @@ import React from 'react';
 import Recipe from './recipe';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Footer from './Footer';
 
 const Food = () => {
     const [recipes, setRecipes] = useState([]);
@@ -64,6 +65,8 @@ const Food = () => {
 
       {/* Recipe Component */}
       <Recipe myRecipes={filteredRecipes} ReloadData={setRecipes} />
+    
+      <Footer></Footer>
     </div>
     
   );

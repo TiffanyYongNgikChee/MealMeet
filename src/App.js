@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/navigationBar';
 import Dashboard from "./components/dashboard";
 import Register from "./components/register";
+import Footer from "./components/Footer";
 import { AuthProvider } from "./components/AuthContext"; // Import AuthProvider correctly
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './news.css';
@@ -24,6 +25,8 @@ function App() {
     <Router>
       <NavigationBar />
       <Routes>
+        {/* Default Home Route */}
+        <Route path="/" element={<Home />} />
         <Route path="/food" element={<Food />} />
         <Route path="/create" element={<Create/>} />
         <Route path='/edit/:id' element={<Edit />} />
@@ -35,7 +38,9 @@ function App() {
         <Route path="/home" element={<Home />} />
       
       </Routes>
+      
     </Router>
+
     </AuthProvider>
   );
 }

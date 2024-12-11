@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
 
@@ -11,6 +12,7 @@ const Create = () => {
     const [ingredients, setIngredients] = useState([{ name: "", quantity: "", unit: "" }]);
     const [steps, setSteps] = useState([{ step_number: 1, instruction: "" }]);
     const categoryOptions = ["Spicy","Chicken","Italian", "Asian", "Western", "Vegan", "Dessert"];
+    const navigate = useNavigate();
 
     const handleCategoryChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
@@ -60,8 +62,14 @@ const Create = () => {
             poster: poster
           };
           axios.post('http://localhost:4000/api/recipes', recipe)
-          .then((res) => console.log(res.data))
-          .catch((err) => console.log(err.data));
+            .then((res) => {
+              console.log(res.data);
+              navigate('/food');
+            })
+            .catch((err) => {
+              console.error(err);
+              alert('Failed to add recipe. Please try again.');
+            });
     }
 
     return  (

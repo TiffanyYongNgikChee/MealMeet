@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 
 const Lifestyle = () => {
   const newsData = [
@@ -32,6 +33,7 @@ const Lifestyle = () => {
             ))}
         </div>
         </div>
+        <Footer></Footer>
     </div>
   );
 };

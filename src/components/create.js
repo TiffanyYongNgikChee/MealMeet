@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-
+    // State variables to manage form input fields  
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
     const [description, setDescription] = useState('');
@@ -14,45 +14,52 @@ const Create = () => {
     const categoryOptions = ["Spicy","Chicken","Italian", "Asian", "Western", "Vegan", "Dessert"];
     const navigate = useNavigate();
 
+    // Handle changes in the selected categories (multiple selections)
     const handleCategoryChange = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions).map((option) => option.value);
-        setCategories(selectedOptions);
-      };
+        setCategories(selectedOptions); // Update the categories state
+    };
 
+    // Handle changes in the ingredients (name, quantity, unit) for a given ingredient index
     const handleIngredientChange = (index, field, value) => {
         const newIngredients = [...ingredients];
         newIngredients[index][field] = value;
         setIngredients(newIngredients);
-      };
-    
-      const addIngredient = () => {
+    };
+
+    // Add a new empty ingredient to the list
+    const addIngredient = () => {
         setIngredients([...ingredients, { name: "", quantity: "", unit: "" }]);
-      };
+    };
     
-      const removeIngredient = (index) => {
-        const newIngredients = ingredients.filter((_, i) => i !== index);
-        setIngredients(newIngredients);
-      };
+    // Remove an ingredient at a specific index
+    const removeIngredient = (index) => {
+      const newIngredients = ingredients.filter((_, i) => i !== index);
+      setIngredients(newIngredients);
+    };
+    // Add a new empty step for recipe preparation
+    const addStep = () => {
+      setSteps([...steps, { step_number: steps.length + 1, instruction: "" }]);
+    };
+    
+    // Remove a step and renumber the remaining steps
+    const removeStep = (index) => {
+      const newSteps = steps.filter((_, i) => i !== index);
+      setSteps(newSteps.map((step, i) => ({ ...step, step_number: i + 1 }))); // Recalculate step numbers
+    };
+    
+    // Handle change in a specific step's instruction
+    const handleStepChange = (index, value) => {
+      const newSteps = [...steps];
+      newSteps[index].instruction = value;
+      setSteps(newSteps);
+    };
 
-      const addStep = () => {
-        setSteps([...steps, { step_number: steps.length + 1, instruction: "" }]);
-      };
-    
-      const removeStep = (index) => {
-        const newSteps = steps.filter((_, i) => i !== index);
-        setSteps(newSteps.map((step, i) => ({ ...step, step_number: i + 1 }))); // Recalculate step numbers
-      };
-    
-      const handleStepChange = (index, value) => {
-        const newSteps = [...steps];
-        newSteps[index].instruction = value;
-        setSteps(newSteps);
-      };
-
+    // Handle form submission (send recipe data to the backend API)
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(`Title: ${title},Description: ${description}, CreatedYear: ${year}, Categories: ${categories},Ingredients: ${ingredients}, Step: ${steps}, Poster: ${poster}`);
-        const recipe = {
+        const recipe = { // Create an object with all form data
             title: title,
             year: year,
             description: description,
@@ -61,10 +68,11 @@ const Create = () => {
             steps:steps,
             poster: poster
           };
+          // Send a POST request to the backend API to create a new recipe
           axios.post('http://localhost:4000/api/recipes', recipe)
             .then((res) => {
-              console.log(res.data);
-              navigate('/food');
+              console.log(res.data); // Log the response from the API
+              navigate('/food'); // Navigate to the '/food' page after successful creation
             })
             .catch((err) => {
               console.error(err);
